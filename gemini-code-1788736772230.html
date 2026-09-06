@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Perfumes</title>
+    <style>
+        /* Estilos generales */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --bg-color: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: #333;
+        }
+        
+        /* Encabezado */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .cart-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .cart-btn:hover {
+            background-color: #d35400;
+        }
+
+        /* Grilla de productos */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            background: #fff;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .product-card h3 {
+            font-size: 18px;
+            margin: 15px 0 5px;
+            color: var(--primary-color);
+        }
+        .product-card .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        .add-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .add-btn:hover {
+            background-color: #1a252f;
+        }
+
+        /* Carrito lateral (Ventanita) */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.4s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-drawer.open {
+            right: 0;
+        }
+        .cart-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .cart-items {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .cart-item h4 {
+            margin: 0;
+            font-size: 14px;
+            width: 60%;
+        }
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        .checkout-btn {
+            width: 100%;
+            background-color: #25D366; /* Color de WhatsApp */
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .checkout-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        /* Overlay oscuro */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+        .overlay.open {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Perfumes Exclusivos</h1>
+        <button class="cart-btn" onclick="toggleCart()">🛒 Mi Carrito (<span id="cart-count">0</span>)</button>
+    </header>
+
+    <div class="container" id="product-list">
+        </div>
+
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Tu Pedido</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            </div>
+        <div class="cart-footer">
+            <div class="total">Total: $<span id="cart-total">0</span></div>
+            <button class="checkout-btn" onclick="continuarCompra()">Continuar Compra 💬</button>
+        </div>
+    </div>
+
+    <script>
+        // Catálogo de productos basado en tus imágenes
+        const productos = [
+            { id: 1, nombre: "Ice Cream Perfume (Choco Overdose)", imagen: "imagen1.png" },
+            { id: 2, nombre: "Explore", imagen: "imagen2.png" },
+            { id: 3, nombre: "Qaid Al Fursan", imagen: "imagen3.png" },
+            { id: 4, nombre: "212 VIP Wild Party NYC", imagen: "imagen4.png" },
+            { id: 5, nombre: "Asad", imagen: "imagen5.png" },
+            { id: 6, nombre: "Areej Al Oud", imagen: "imagen6.png" },
+            { id: 7, nombre: "Odyssey Tyrant Special Edition", imagen: "imagen7.png" },
+            { id: 8, nombre: "Elixir Oud Mood", imagen: "imagen8.png" },
+            { id: 9, nombre: "Ame Ame", imagen: "imagen9.png" },
+            { id: 10, nombre: "Ramz Lattafa", imagen: "imagen10.png" }
+        ];
+
+        const PRECIO_UNITARIO = 5000;
+        let carrito = [];
+
+        // Cargar productos en la pantalla
+        function renderizarProductos() {
+            const productList = document.getElementById('product-list');
+            productos.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${prod.imagen}" alt="${prod.nombre}">
+                    <h3>${prod.nombre}</h3>
+                    <div class="price">$${PRECIO_UNITARIO}</div>
+                    <button class="add-btn" onclick="agregarAlCarrito(${prod.id})">Agregar</button>
+                `;
+                productList.appendChild(card);
+            });
+        }
+
+        // Agregar al carrito y abrir la ventanita
+        function agregarAlCarrito(id) {
+            const producto = productos.find(p => p.id === id);
+            const itemEnCarrito = carrito.find(item => item.id === id);
+
+            if (itemEnCarrito) {
+                itemEnCarrito.cantidad++;
+            } else {
+                carrito.push({ ...producto, cantidad: 1 });
+            }
+            
+            actualizarCarrito();
+            
+            // Abre el carrito automáticamente si no está abierto
+            const drawer = document.getElementById('cart-drawer');
+            if(!drawer.classList.contains('open')){
+                toggleCart();
+            }
+        }
+
+        // Actualizar la vista del carrito
+        function actualizarCarrito() {
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+            let cantidadTotal = 0;
+
+            carrito.forEach(item => {
+                const subtotal = item.cantidad * PRECIO_UNITARIO;
+                total += subtotal;
+                cantidadTotal += item.cantidad;
+
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <h4>${item.nombre} (x${item.cantidad})</h4>
+                        <span>$${subtotal}</span>
+                    </div>
+                `;
+            });
+
+            if (carrito.length === 0) {
+                cartItems.innerHTML = '<p style="text-align:center; color:#777;">Tu carrito está vacío.</p>';
+            }
+
+            cartCount.innerText = cantidadTotal;
+            cartTotal.innerText = total;
+        }
+
+        // Abrir y cerrar la ventanita derecha
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('open');
+        }
+
+        // Redirigir a WhatsApp
+        function continuarCompra() {
+            if (carrito.length === 0) {
+                alert('Agregá al menos un producto para continuar.');
+                return;
+            }
+
+            // *** CAMBIA ESTE NÚMERO POR EL TUYO (EJ: 5491123456789) ***
+            const numeroWhatsApp = "TU_NUMERO_DE_WHATSAPP"; 
+            
+            let mensaje = "Hola! Quiero hacer el siguiente pedido de perfumes:%0A%0A";
+            let total = 0;
+
+            carrito.forEach(item => {
+                mensaje += `- ${item.cantidad}x ${item.nombre} ($${item.cantidad * PRECIO_UNITARIO})%0A`;
+                total += (item.cantidad * PRECIO_UNITARIO);
+            });
+
+            mensaje += `%0A*Total a pagar: $${total}*`;
+
+            const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+            window.open(url, '_blank');
+        }
+
+        // Iniciar
+        renderizarProductos();
+        actualizarCarrito();
+    </script>
+</body>
+</html>
