@@ -1,189 +1,323 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" href="portada.jpg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innova market ecomers</title>
+    <title>Innova Market</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos generales */
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e67e22;
-            --bg-color: #f8f9fa;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: #333;
+            --primary-color: #000;
+            --secondary-color: #f8f8f8;
+            --text-color: #333;
+            --border-color: #eaeaea;
         }
         
-        /* Encabezado */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--text-color);
+        }
+
+        /* Header */
         header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .cart-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        .cart-btn:hover {
-            background-color: #d35400;
+            padding: 20px 5%;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
         }
 
-        /* Grilla de productos */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            text-align: center;
-            padding-bottom: 20px;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .product-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: contain;
-            background: #fff;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .product-card h3 {
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
             font-size: 18px;
-            margin: 15px 0 5px;
-            color: var(--primary-color);
+            font-weight: 600;
         }
-        .product-card .price {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--accent-color);
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            background: #d0021b;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+
+        /* Hero / Description */
+        .hero {
+            text-align: center;
+            padding: 50px 5%;
+            background-color: var(--secondary-color);
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Sections */
+        .section-title {
+            text-align: left;
+            margin: 40px 5% 20px;
+            font-size: 24px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Catalogs Cover (Horizontal Scroll or Grid) */
+        .catalog-covers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 5%;
+        }
+
+        .catalog-cover {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .catalog-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .catalog-cover:hover img {
+            transform: scale(1.05);
+        }
+
+        .catalog-cover h3 {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 15px 0;
+            font-size: 18px;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 30px;
+            padding: 0 5% 50px;
+        }
+
+        .product-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
             margin-bottom: 15px;
         }
-        .add-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        .add-btn:hover {
-            background-color: #1a252f;
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #111;
+            min-height: 40px;
         }
 
-        /* Carrito lateral (Ventanita) */
-        .cart-drawer {
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .btn-add {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 0;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-add:hover {
+            background-color: #333;
+        }
+
+        /* Sidebar Cart */
+        .cart-sidebar {
             position: fixed;
             top: 0;
             right: -400px;
-            width: 350px;
+            width: 400px;
+            max-width: 100%;
             height: 100vh;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.4s ease;
-            z-index: 1000;
+            background: #fff;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 999;
             display: flex;
             flex-direction: column;
         }
-        .cart-drawer.open {
+
+        .cart-sidebar.open {
             right: 0;
         }
+
         .cart-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .close-cart {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .cart-items {
-            flex-grow: 1;
             padding: 20px;
-            overflow-y: auto;
+            border-bottom: 1px solid var(--border-color);
         }
+
+        .cart-header h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .close-cart {
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-        }
-        .cart-item h4 {
-            margin: 0;
-            font-size: 14px;
-            width: 60%;
-        }
-        .cart-footer {
-            padding: 20px;
-            border-top: 1px solid #eee;
-        }
-        .total {
-            font-size: 20px;
-            font-weight: bold;
             margin-bottom: 15px;
-            text-align: right;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
         }
-        .checkout-btn {
-            width: 100%;
-            background-color: #25D366; /* Color de WhatsApp */
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
+
+        .cart-item-info {
+            flex: 1;
         }
-        .checkout-btn:hover {
-            background-color: #128C7E;
+
+        .cart-item-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .cart-item-price {
+            color: #666;
+            font-size: 13px;
+            margin-top: 5px;
         }
         
-        /* Overlay oscuro */
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .qty-btn {
+            background: #eee;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background: #f9f9f9;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .btn-checkout {
+            background-color: #25D366; /* WhatsApp Green */
+            color: #fff;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .btn-checkout:hover {
+            background-color: #1ebd5a;
+        }
+
+        /* Overlay */
         .overlay {
             position: fixed;
             top: 0;
@@ -191,197 +325,1280 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.5);
+            z-index: 998;
             display: none;
-            z-index: 999;
         }
-        .overlay.open {
+
+        .overlay.active {
             display: block;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <header>
-        <h1>Fragancias Exclusivas⚱️💎</h1>
-        <button class="cart-btn" onclick="toggleCart()">🛒 Mi Carrito (<span id="cart-count">0</span>)</button>
+        <div class="logo">Innova Market</div>
+        <div class="cart-icon" onclick="toggleCart()">
+            🛒 Mi Carrito <span class="cart-count" id="cart-count">0</span>
+        </div>
     </header>
 
-    <div class="container" id="product-list">
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Innova Market</h1>
+        <!-- MODIFICABLE: Puedes cambiar la descripción de abajo -->
+        <p>Descubrí nuestra amplia selección de productos premium. Desde fragancias exclusivas hasta los mejores accesorios de tecnología, todo pensado para vos. Explora nuestras recomendaciones y elegí tus favoritos.</p>
+    </section>
+
+    <!-- Catálogos (Portadas) -->
+    <h2 class="section-title">Nuestros Catálogos</h2>
+    <div class="catalog-covers">
+        <!-- Puedes modificar el src de la imagen de cada portada -->
+        <div class="catalog-cover" onclick="scrollToSection('cat-30ml')">
+            <img src="https://via.placeholder.com/300x300?text=Perfumes+30ml" alt="Perfumes 30ml">
+            <h3>Perfumes 30ml</h3>
         </div>
-<!-- SECTOR: Perfumes 30 ml -->
-<section class="category-section">
-  <h2 style="padding: 20px; color: #fff; background-color: #2c3e50; margin-bottom: 20px;">Perfumes 30 ml</h2>
-  
-  <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px;">
-    <div class="product-card" style="background: #fff; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-      <img src="ruta-imagen.jpg" alt="Perfume 30ml" style="width: 100%; height: auto; border-radius: 4px;">
-      <h3 style="font-size: 14px; margin: 10px 0;">Nombre Perfume 30ml</h3>
-      <p class="price" style="color: #e67e22; font-weight: bold; margin-bottom: 15px;">$10000</p>
-       <button class="btn-agregar" onclick="agregarAlCarrito()">Agregar</button>
+        <div class="catalog-cover" onclick="scrollToSection('cat-vs')">
+            <img src="https://via.placeholder.com/300x300?text=Victoria+Secrets" alt="Victoria Secrets">
+            <h3>Victoria Secrets</h3>
+        </div>
+        <div class="catalog-cover" onclick="scrollToSection('cat-auriculares')">
+            <img src="https://via.placeholder.com/300x300?text=Auriculares" alt="Auriculares">
+            <h3>Auriculares</h3>
+        </div>
+        <div class="catalog-cover" onclick="scrollToSection('cat-fundas')">
+            <img src="https://via.placeholder.com/300x300?text=Fundas" alt="Fundas de celulares">
+            <h3>Fundas</h3>
+        </div>
+        <div class="catalog-cover" onclick="scrollToSection('cat-otros')">
+            <img src="https://via.placeholder.com/300x300?text=Otros" alt="Otros">
+            <h3>Otros</h3>
+        </div>
     </div>
-  </div>
-</section>
 
-<!-- SECTOR: Victoria's Secrets -->
-<section class="category-section">
-  <h2 style="padding: 20px; color: #fff; background-color: #2c3e50; margin-bottom: 20px;">Victoria's Secrets</h2>
-  
-  <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px;">
-    <div class="product-card" style="background: #fff; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-      <img src="ruta-imagen.jpg" alt="Victoria's Secret" style="width: 100%; height: auto; border-radius: 4px;">
-      <h3 style="font-size: 14px; margin: 10px 0;">Nombre Fragancia</h3>
-      <p class="price" style="color: #e67e22; font-weight: bold; margin-bottom: 15px;">$25000</p>
-      <button class="btn-agregar" style="background: #2c3e50; color: #fff; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer;">Agregar</button>
-    </div>
-  </div>
-</section>
+    <h2 class="section-title" id="cat-arabes">Perfumes Árabes en Tubitos (Principal)</h2>
+    <div class="product-grid">
 
-<!-- SECTOR: Electrodomésticos -->
-<section class="category-section">
-  <h2 style="padding: 20px; color: #fff; background-color: #2c3e50; margin-bottom: 20px;">Electrodomésticos</h2>
-  
-  <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px;">
-    <div class="product-card" style="background: #fff; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-      <img src="ruta-imagen.jpg" alt="Electrodoméstico" style="width: 100%; height: auto; border-radius: 4px;">
-      <h3 style="font-size: 14px; margin: 10px 0;">Nombre Producto</h3>
-      <p class="price" style="color: #e67e22; font-weight: bold; margin-bottom: 15px;">$12500</p>
-      <button class="btn-agregar" style="background: #2c3e50; color: #fff; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer;">Agregar</button>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+1" alt="Perfume Árabe Tubito 1" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 1</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 1', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+2" alt="Perfume Árabe Tubito 2" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 2</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 2', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+3" alt="Perfume Árabe Tubito 3" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 3</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 3', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+4" alt="Perfume Árabe Tubito 4" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 4</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 4', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+5" alt="Perfume Árabe Tubito 5" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 5</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 5', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+6" alt="Perfume Árabe Tubito 6" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 6</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 6', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+7" alt="Perfume Árabe Tubito 7" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 7</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 7', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+8" alt="Perfume Árabe Tubito 8" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 8</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 8', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+9" alt="Perfume Árabe Tubito 9" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 9</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 9', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+10" alt="Perfume Árabe Tubito 10" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 10</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 10', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+11" alt="Perfume Árabe Tubito 11" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 11</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 11', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+12" alt="Perfume Árabe Tubito 12" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 12</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 12', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+13" alt="Perfume Árabe Tubito 13" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 13</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 13', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+14" alt="Perfume Árabe Tubito 14" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 14</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 14', 9000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+15" alt="Perfume Árabe Tubito 15" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume Árabe Tubito 15</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$9000</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume Árabe Tubito 15', 9000)">Agregar 🛒</button>
+        </div>
     </div>
-  </div>
-</section>
+
+    <h2 class="section-title" id="cat-30ml">Perfumes de 30ml</h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+1" alt="Perfume 30ml 1" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 1</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 1', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+2" alt="Perfume 30ml 2" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 2</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 2', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+3" alt="Perfume 30ml 3" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 3</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 3', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+4" alt="Perfume 30ml 4" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 4</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 4', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+5" alt="Perfume 30ml 5" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 5</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 5', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+6" alt="Perfume 30ml 6" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 6</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 6', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+7" alt="Perfume 30ml 7" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 7</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 7', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+8" alt="Perfume 30ml 8" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 8</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 8', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+9" alt="Perfume 30ml 9" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 9</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 9', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+10" alt="Perfume 30ml 10" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 10</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 10', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+11" alt="Perfume 30ml 11" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 11</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 11', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+12" alt="Perfume 30ml 12" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 12</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 12', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+13" alt="Perfume 30ml 13" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 13</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 13', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+14" alt="Perfume 30ml 14" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 14</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 14', 7500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+15" alt="Perfume 30ml 15" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Perfume 30ml 15</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$7500</div>
+            
+            <button class="btn-add" onclick="addToCart('Perfume 30ml 15', 7500)">Agregar 🛒</button>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="cat-vs">Victoria Secrets</h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+1" alt="Splash Victoria Secret 1" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 1</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 1', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+2" alt="Splash Victoria Secret 2" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 2</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 2', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+3" alt="Splash Victoria Secret 3" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 3</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 3', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+4" alt="Splash Victoria Secret 4" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 4</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 4', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+5" alt="Splash Victoria Secret 5" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 5</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 5', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+6" alt="Splash Victoria Secret 6" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 6</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 6', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+7" alt="Splash Victoria Secret 7" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 7</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 7', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+8" alt="Splash Victoria Secret 8" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 8</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 8', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+9" alt="Splash Victoria Secret 9" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 9</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 9', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+10" alt="Splash Victoria Secret 10" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 10</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 10', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+11" alt="Splash Victoria Secret 11" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 11</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 11', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+12" alt="Splash Victoria Secret 12" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 12</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 12', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+13" alt="Splash Victoria Secret 13" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 13</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 13', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+14" alt="Splash Victoria Secret 14" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 14</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 14', 12000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+15" alt="Splash Victoria Secret 15" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Splash Victoria Secret 15</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$12000</div>
+            
+            <button class="btn-add" onclick="addToCart('Splash Victoria Secret 15', 12000)">Agregar 🛒</button>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="cat-auriculares">Auriculares</h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+1" alt="Auricular Inalámbrico 1" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 1</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 1', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+2" alt="Auricular Inalámbrico 2" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 2</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 2', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+3" alt="Auricular Inalámbrico 3" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 3</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 3', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+4" alt="Auricular Inalámbrico 4" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 4</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 4', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+5" alt="Auricular Inalámbrico 5" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 5</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 5', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+6" alt="Auricular Inalámbrico 6" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 6</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 6', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+7" alt="Auricular Inalámbrico 7" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 7</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 7', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+8" alt="Auricular Inalámbrico 8" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 8</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 8', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+9" alt="Auricular Inalámbrico 9" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 9</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 9', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+10" alt="Auricular Inalámbrico 10" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 10</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 10', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+11" alt="Auricular Inalámbrico 11" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 11</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 11', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+12" alt="Auricular Inalámbrico 12" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 12</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 12', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+13" alt="Auricular Inalámbrico 13" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 13</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 13', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+14" alt="Auricular Inalámbrico 14" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 14</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 14', 15000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+15" alt="Auricular Inalámbrico 15" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Auricular Inalámbrico 15</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$15000</div>
+            
+            <button class="btn-add" onclick="addToCart('Auricular Inalámbrico 15', 15000)">Agregar 🛒</button>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="cat-fundas">Fundas de Celulares</h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+1" alt="Funda Silicona 1" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 1</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 1', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+2" alt="Funda Silicona 2" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 2</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 2', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+3" alt="Funda Silicona 3" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 3</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 3', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+4" alt="Funda Silicona 4" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 4</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 4', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+5" alt="Funda Silicona 5" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 5</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 5', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+6" alt="Funda Silicona 6" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 6</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 6', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+7" alt="Funda Silicona 7" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 7</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 7', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+8" alt="Funda Silicona 8" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 8</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 8', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+9" alt="Funda Silicona 9" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 9</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 9', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+10" alt="Funda Silicona 10" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 10</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 10', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+11" alt="Funda Silicona 11" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 11</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 11', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+12" alt="Funda Silicona 12" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 12</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 12', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+13" alt="Funda Silicona 13" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 13</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 13', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+14" alt="Funda Silicona 14" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 14</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 14', 3500)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+15" alt="Funda Silicona 15" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Funda Silicona 15</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$3500</div>
+            
+            <button class="btn-add" onclick="addToCart('Funda Silicona 15', 3500)">Agregar 🛒</button>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="cat-otros">Otros</h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+1" alt="Accesorio Vario 1" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 1</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 1', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+2" alt="Accesorio Vario 2" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 2</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 2', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+3" alt="Accesorio Vario 3" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 3</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 3', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+4" alt="Accesorio Vario 4" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 4</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 4', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+5" alt="Accesorio Vario 5" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 5</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 5', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+6" alt="Accesorio Vario 6" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 6</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 6', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+7" alt="Accesorio Vario 7" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 7</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 7', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+8" alt="Accesorio Vario 8" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 8</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 8', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+9" alt="Accesorio Vario 9" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 9</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 9', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+10" alt="Accesorio Vario 10" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 10</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 10', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+11" alt="Accesorio Vario 11" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 11</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 11', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+12" alt="Accesorio Vario 12" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 12</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 12', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+13" alt="Accesorio Vario 13" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 13</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 13', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+14" alt="Accesorio Vario 14" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 14</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 14', 5000)">Agregar 🛒</button>
+        </div>
+        <div class="product-card">
+            <!-- MODIFICABLE: Cambia el src por el link de tu imagen -->
+            <img src="https://via.placeholder.com/200x200?text=Producto+15" alt="Accesorio Vario 15" class="product-image">
+            
+            <!-- MODIFICABLE: Cambia el nombre del producto aquí -->
+            <div class="product-name">Accesorio Vario 15</div>
+            
+            <!-- MODIFICABLE: Cambia el precio aquí -->
+            <div class="product-price">$5000</div>
+            
+            <button class="btn-add" onclick="addToCart('Accesorio Vario 15', 5000)">Agregar 🛒</button>
+        </div>
+    </div>
+
+    <!-- Sidebar Cart -->
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
-
-    <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
-            <h2>Tu Pedido</h2>
-            <button class="close-cart" onclick="toggleCart()">×</button>
+            <h2>Tu Compra</h2>
+            <div class="close-cart" onclick="toggleCart()">&times;</div>
         </div>
         <div class="cart-items" id="cart-items">
-            </div>
+            <!-- Los items del carrito aparecerán aquí -->
+        </div>
         <div class="cart-footer">
-            <div class="total">Total: $<span id="cart-total">0</span></div>
-            <button class="checkout-btn" onclick="continuarCompra()">Continuar Compra 💬</button>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Continuar Compra</button>
         </div>
     </div>
 
     <script>
-        // Catálogo de productos basado en tus imágenes
-        const productos = [
-            { id: 1, nombre: "Ice Cream Perfume (Choco Overdose)", imagen: "imagen1.png" },
-            { id: 2, nombre: "Explore", imagen: "imagen2.png" },
-            { id: 3, nombre: "Qaid Al Fursan", imagen: "imagen3.png" },
-            { id: 4, nombre: "717 VIP Wild Party NYC", imagen: "imagen4.png" },
-            { id: 5, nombre: "Asad", imagen: "imagen5.png" },
-            { id: 6, nombre: "Areej Al Oud", imagen: "imagen6.png" },
-            { id: 7, nombre: "Odyssey Tyrant Special Edition", imagen: "imagen7.png" },
-            { id: 8, nombre: "Elixir Oud Mood", imagen: "imagen8.png" },
-            { id: 9, nombre: "Ame Ame", imagen: "imagen9.png" },
-            { id: 10, nombre: "Ramz Lattafa", imagen: "imagen10.png" }
-        ];
+        let cart = [];
 
-        const PRECIO_UNITARIO = 5000;
-        let carrito = [];
-
-        // Cargar productos en la pantalla
-        function renderizarProductos() {
-            const productList = document.getElementById('product-list');
-            productos.forEach(prod => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <img src="${prod.imagen}" alt="${prod.nombre}">
-                    <h3>${prod.nombre}</h3>
-                    <div class="price">$${PRECIO_UNITARIO}</div>
-                    <button class="add-btn" onclick="agregarAlCarrito(${prod.id})">Agregar</button>
-                `;
-                productList.appendChild(card);
-            });
-        }
-
-        // Agregar al carrito y abrir la ventanita
-        function agregarAlCarrito(id) {
-            const producto = productos.find(p => p.id === id);
-            const itemEnCarrito = carrito.find(item => item.id === id);
-
-            if (itemEnCarrito) {
-                itemEnCarrito.cantidad++;
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.qty += 1;
             } else {
-                carrito.push({ ...producto, cantidad: 1 });
+                cart.push({ name: name, price: price, qty: 1 });
             }
-            
-            actualizarCarrito();
-            
-            // Abre el carrito automáticamente si no está abierto
-            const drawer = document.getElementById('cart-drawer');
-            if(!drawer.classList.contains('open')){
-                toggleCart();
-            }
+            updateCart();
+            openCart();
         }
 
-        // Actualizar la vista del carrito
-        function actualizarCarrito() {
-            const cartItems = document.getElementById('cart-items');
-            const cartCount = document.getElementById('cart-count');
-            const cartTotal = document.getElementById('cart-total');
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total-price');
+            const cartCountEl = document.getElementById('cart-count');
             
-            cartItems.innerHTML = '';
+            cartItemsContainer.innerHTML = '';
             let total = 0;
-            let cantidadTotal = 0;
+            let count = 0;
 
-            carrito.forEach(item => {
-                const subtotal = item.cantidad * PRECIO_UNITARIO;
-                total += subtotal;
-                cantidadTotal += item.cantidad;
-
-                cartItems.innerHTML += `
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                count += item.qty;
+                
+                cartItemsContainer.innerHTML += `
                     <div class="cart-item">
-                        <h4>${item.nombre} (x${item.cantidad})</h4>
-                        <span>$${subtotal}</span>
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">$${item.price.toLocaleString('es-AR')}</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                        </div>
                     </div>
                 `;
             });
 
-            if (carrito.length === 0) {
-                cartItems.innerHTML = '<p style="text-align:center; color:#777;">Tu carrito está vacío.</p>';
+            cartTotalEl.innerText = '$' + total.toLocaleString('es-AR');
+            cartCountEl.innerText = count;
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
             }
-
-            cartCount.innerText = cantidadTotal;
-            cartTotal.innerText = total;
+            updateCart();
         }
 
-        // Abrir y cerrar la ventanita derecha
         function toggleCart() {
-            document.getElementById('cart-drawer').classList.toggle('open');
-            document.getElementById('overlay').classList.toggle('open');
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
         }
 
-        // Redirigir a WhatsApp
-        function continuarCompra() {
-            if (carrito.length === 0) {
-                alert('Agregá al menos un producto para continuar.');
+        function openCart() {
+            document.getElementById('cart-sidebar').classList.add('open');
+            document.getElementById('overlay').classList.add('active');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Tu carrito está vacío.");
                 return;
             }
 
-            // *** CAMBIA ESTE NÚMERO POR EL TUYO (EJ: 5491123456789) ***
-            const numeroWhatsApp = "3364341230"; 
-            
-            let mensaje = "Hola! Quiero hacer el siguiente pedido de perfumes:%0A%0A";
+            let text = "¡Hola Innova Market! Quiero realizar la siguiente compra:\n\n";
             let total = 0;
 
-            carrito.forEach(item => {
-                mensaje += `- ${item.cantidad}x ${item.nombre} ($${item.cantidad * PRECIO_UNITARIO})%0A`;
-                total += (item.cantidad * PRECIO_UNITARIO);
+            cart.forEach(item => {
+                text += `▪ ${item.qty}x ${item.name} - $${(item.price * item.qty).toLocaleString('es-AR')}\n`;
+                total += item.price * item.qty;
             });
 
-            mensaje += `%0A*Total a pagar: $${total}*`;
+            text += `\n*Total a pagar: $${total.toLocaleString('es-AR')}*\n\n¡Muchas gracias!`;
 
-            const url = `https://wa.me/${3364341230}?text=${mensaje}`;
+            // Número de WhatsApp (Formato internacional de Argentina: 54 9 + código de área + número)
+            // Código de área de San Nicolás es 336, por ende: 5493364341230
+            const whatsappNumber = "5493364341230";
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+            
             window.open(url, '_blank');
         }
-
-        // Iniciar
-        renderizarProductos();
-        actualizarCarrito();
     </script>
 </body>
 </html>
